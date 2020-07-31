@@ -1,0 +1,1 @@
+g++ jikan.cpp -o jikan
