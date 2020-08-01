@@ -4,20 +4,33 @@
 #include <string>
 #include <vector>
 
-std::string filename = "logs.txt";
-std::string path = "/home/abstractxan/Logs/";
+std::string filename_a = "logs.txt";
+std::string filename_b = "list.txt";
+std::string path = "E:/ss files/Exxon/";
 int argNum;
 std::vector<std::string> logArgs;
 
 void logWriter() {
   std::ofstream LogFile;
-  std::string filepath = path + filename;
+  std::string filepath;
+  if(logArgs[3]=="Log")
+     filepath= path + filename_a;
+  else
+     filepath= path + filename_b;
   LogFile.open(filepath.c_str(), std::ios::app);
-
-  // UNIX Time
+     // UNIX Time
   std::time_t now = time(0);
-  LogFile << now << " \"" << logArgs[1] << "\" \"" << logArgs[2]<< "\"" << std::endl;
-  std::cout << now << " \"" << logArgs[1] << "\" \"" << logArgs[2]<< "\"" << std::endl;
+  if(logArgs[3]=="Log")
+  {
+    LogFile << localtime(&now)->tm_hour << " \"" << logArgs[1] << "\" \"" << logArgs[2]<< "\"" << std::endl;
+    std::cout <<localtime(&now)->tm_hour << " \"" << logArgs[1] << "\" \"" << logArgs[2]<< "\"" << std::endl;
+    std::cout <<"Task Logged";
+  }
+  if(logArgs[3]=="Todo")
+  {
+    LogFile << logArgs[2] << std::endl; 
+    std::cout<<"Task entered";
+  }
   LogFile.close();
 }
 
@@ -33,10 +46,11 @@ void argHandler() {
   if (command == "stats") {
     getStats();
   } else if (command == "file" ) {
-    std::cout << path+filename << std::endl;
+    std::cout << "For log" << path+filename_a << std::endl;
+    std::cout << "For To-Do list"<<path+filename_b<<std::endl;
   }else if (command == "path" ) {
     std::cout << path << std::endl;
-  } else if (argNum == 3) { // Default
+  } else if (argNum == 4) { // Default
     logger();
   } else {
     std::cout << command << std::endl;
