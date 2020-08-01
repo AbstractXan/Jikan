@@ -1,5 +1,5 @@
 # Jikan
-A personal time logger.
+A simple commandline timestamp logger.  Jikan (時間) is Japanese for time.
 
 ## Build
 1. Update `path` and `filename` in `jikan.cpp`
