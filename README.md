@@ -32,18 +32,19 @@ usage: jikan <command> [<args>]
 These are common Jikan commands:
 
 log task
-   <head> <desc> 	Adds a task of type 'work'
+   <head> <desc>        Adds a task of type 'work'
 
 print paths
-   path 	Show repository path
-   file 	Show logfile path
-   todo 	Show todo path
+   path                 Show repository path
+   file                 Show logfile path
+   todo                 Show todo path
 
 todo list
-   add <item> 	Adds a todo item
+   add <item>           Adds a todo item
+   remove <item>        Removes a todo item
 
 stats
-   stats 	Show statistics
+   stats                Show statistics
 ```
 ## References
 &lt;ctime&gt; [link](https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm)
