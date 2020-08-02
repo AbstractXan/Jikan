@@ -3,10 +3,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <string>
 std::string filenameLogs = "logs.txt";
 std::string filenameTodo = "todo.txt";
-std::string path = "E:/ss files/Jikan/";
+std::string path = "/home/abstractxan/Logs/";
 int argNum;
 std::vector<std::string> argsList;
 
@@ -44,7 +43,7 @@ void todoRemove(){
   todoFile.open(filepath.c_str());
   while(todoFile.good()){
   	getline(todoFile,line);
-  	if(line!=argsList[2]){
+  	if(line!=argsList[2] && line!=""){
   		temp<<line<<std::endl;
   	}
   }
@@ -52,7 +51,7 @@ void todoRemove(){
   temp.close();
   remove(filepath.c_str());
   rename("temp.txt",filepath.c_str());
-  std::cout<<"Task removed from ToDo";
+  std::cout<<"Task removed from ToDo" << std::endl;
 }
 
 void logger() { 
@@ -73,13 +72,14 @@ void printHelper() {
     +"\nlog task\n"
         + "   " + "<head> <desc> \tAdds a task of type 'work'\n" 
     +"\nprint paths\n"
-        + "   " + "path \tShow repository path\n"
-        + "   " + "file \tShow logfile path\n"
-        + "   " + "todo \tShow todo path\n"
+        + "   " + "path \t\tShow repository path\n"
+        + "   " + "file \t\tShow logfile path\n"
+        + "   " + "todo \t\tShow todo path\n"
     +"\ntodo list\n"
-        + "   " + "add <item> \tAdds a todo item\n"
+        + "   " + "add <item> \t\tAdds a todo item\n"
+        + "   " + "remove <item> \tRemoves a todo item\n"
     +"\nstats\n"
-        + "   " + "stats \tShow statistics\n"
+        + "   " + "stats \t\tShow statistics\n"
   << std::endl;
 }
 
