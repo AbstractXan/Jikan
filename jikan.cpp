@@ -26,8 +26,10 @@ void logger() { logWriter(); }
 void getStats() { std::cout << "Stats feature coming soon " << std::endl; }
 
 void printHelper() {
-  std::cout << "Accepted format: \n$ jikan <heading> <details>\n$ jikan stats\n$ jikan path\n$ jikan file "<< std::endl;
+  std::cout << "usage: jikan <command>\nThese are common Jikan commands:\nLog a normal 'work' task:\n\tjikan <heading> <details>\nPrint Stats:\n\tjikan stats\n\tPrint Path\n\tjikan path\nPrint file location\n\t$ jikan file "<< std::endl;
 }
+
+
 void argHandler() {
   std::string command = logArgs[1];
   if (command == "stats") {
