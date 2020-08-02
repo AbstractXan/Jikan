@@ -3,10 +3,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <string>
 std::string filenameLogs = "logs.txt";
 std::string filenameTodo = "todo.txt";
-std::string path = "/home/abstractxan/Logs/";
+std::string path = "E:/ss files/Jikan/";
 int argNum;
 std::vector<std::string> argsList;
 
@@ -35,9 +35,31 @@ void logWriter() {
   LogFile.close();
 }
 
+void todoRemove(){
+  std::fstream todoFile;
+  std::fstream temp;
+  std::string filepath = path + filenameTodo;
+  std::string line;
+  temp.open("temp.txt",std::ios::out);
+  todoFile.open(filepath.c_str());
+  while(todoFile.good()){
+  	getline(todoFile,line);
+  	if(line!=argsList[2]){
+  		temp<<line<<std::endl;
+  	}
+  }
+  todoFile.close();
+  temp.close();
+  remove(filepath.c_str());
+  rename("temp.txt",filepath.c_str());
+  std::cout<<"Task removed from ToDo";
+}
+
 void logger() { 
   if(argNum == 3 && argsList[1] == "add"){
     todoWriter(); 
+  }else if(argNum==3 && argsList[1]=="remove"){
+  	todoRemove();
   } else if (argNum == 3){
     logWriter();
   }
