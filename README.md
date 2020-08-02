@@ -26,13 +26,24 @@ Print logs after setting path in bashrc as follows:
 
 ``` cat `jikan file` ```
 
-## Format
-Accepted format:
+## Usage
 ``` 
-$ jikan <heading> <details>
-$ jikan stats
-$ jikan path
-$ jikan file
+usage: jikan <command> [<args>]
+These are common Jikan commands:
+
+log task
+   <head> <desc> 	Adds a task of type 'work'
+
+print paths
+   path 	Show repository path
+   file 	Show logfile path
+   todo 	Show todo path
+
+todo list
+   add <item> 	Adds a todo item
+
+stats
+   stats 	Show statistics
 ```
 ## References
 &lt;ctime&gt; [link](https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm)
