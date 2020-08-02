@@ -1,6 +1,12 @@
 # Jikan
 A simple commandline timestamp logger.  Jikan (時間) is Japanese for time.
 
+## TODO
+- [ ] Log [tags]
+- [ ] Todolist [add, start, done]
+- [ ] STATS 
+- [ ] EXPORT [html, csv]
+
 ## Build
 1. Update `path` and `filename` in `jikan.cpp`
 2. Run ` ./build.sh `
@@ -31,5 +37,3 @@ $ jikan file
 ## References
 &lt;ctime&gt; [link](https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm)
 
-## Asciinema
-[![asciicast](https://asciinema.org/a/GY86dk9Qti08TZF0Zw0p1dmpH.svg)](https://asciinema.org/a/GY86dk9Qti08TZF0Zw0p1dmpH)
