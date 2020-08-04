@@ -19,12 +19,7 @@ Add current repository path to `.bashrc` like so:
 ```
 Run `source ~/.bashrc` to reload bashrc
 
-Jikan can now be run using `$ jikan `
-
-## Print log
-Print logs after setting path in bashrc as follows:
-
-``` cat `jikan file` ```
+Jikan can now be run using `$ jikan`
 
 ## Usage
 ``` 
