@@ -36,7 +36,7 @@ todo list
    done <item>          Logs item
    remove <item>        Removes an item
 
-print paths
+print
    log                  Print log
    todo                 Print todo
 
