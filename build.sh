@@ -1,1 +1,1 @@
-g++ jikan.cpp -o jikan
+g++ src/jikan.cpp -o jikan
