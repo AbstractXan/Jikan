@@ -68,10 +68,10 @@ void todoDone(std::string item){
 void logger() { 
   if(argNum == 3 && argsList[1] == "add"){
     todoWriter(argsList[2]); 
+  }else if(argNum==3 && argsList[1]=="start"){
+  	logWriter(argsList[2]);
   }else if(argNum==3 && argsList[1]=="done"){
   	todoDone(argsList[2]);
-  }else if(argNum==3 && argsList[1]=="remove"){
-  	todoRemove(argsList[2]);
   }
 }
 
