@@ -7,7 +7,7 @@
 int argNum;
 std::vector<std::string> argsList;
 
-std::string path = "E:/ss files/Jikan/";
+std::string path = "/home/abstractxan/Logs/";
 std::string filenameLogs = "logs.txt";
 std::string filenameTodo = "todo.txt";
 
