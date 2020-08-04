@@ -41,7 +41,7 @@ print paths
 
 todo list
    add <item>           Adds a todo item
-   remove <item>        Removes a todo item
+   done <item>        Removes a todo item
 
 stats
    stats                Show statistics

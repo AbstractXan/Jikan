@@ -9,16 +9,16 @@ std::string path = "/home/abstractxan/Logs/";
 int argNum;
 std::vector<std::string> argsList;
 
-void todoWriter(){
+void todoWriter(std::string item){
   std::ofstream todoFile;
   std::string filepath = path + filenameTodo;
   todoFile.open(filepath.c_str(), std::ios::app);
-  todoFile << argsList[2] << std::endl; 
-  std::cout<< "Task '" << argsList[2] << "' added" << std::endl;
+  todoFile << item << std::endl; 
+  std::cout<< "Task '" << item  << "' added" << std::endl;
   todoFile.close();
 }
 
-void logWriter() {
+void logWriter(std::string head, std::string desc) {
   std::ofstream LogFile;
   std::string filepath;
   
@@ -27,14 +27,14 @@ void logWriter() {
   
   // UNIX Time
   std::time_t now = time(0);
-  LogFile << now << " \"" << argsList[1] << "\" \"" << argsList[2]<< "\"" << std::endl;
-  std::cout << now << " \"" << argsList[1] << "\" \"" << argsList[2]<< "\"" << std::endl;
+  LogFile << now << " \"" << head << "\" \"" << desc<< "\"" << std::endl;
+  std::cout << now << " \"" << head << "\" \"" << desc << "\"" << std::endl;
   std::cout <<"Task Logged" << std::endl;
 
   LogFile.close();
 }
 
-void todoRemove(){
+void todoRemove(std::string item){
   std::fstream todoFile;
   std::fstream temp;
   std::string filepath = path + filenameTodo;
@@ -43,7 +43,7 @@ void todoRemove(){
   todoFile.open(filepath.c_str());
   while(todoFile.good()){
   	getline(todoFile,line);
-  	if(line!=argsList[2] && line!=""){
+  	if(line!=item && line!=""){
   		temp<<line<<std::endl;
   	}
   }
@@ -51,16 +51,25 @@ void todoRemove(){
   temp.close();
   remove(filepath.c_str());
   rename("temp.txt",filepath.c_str());
-  std::cout<<"Task removed from ToDo" << std::endl;
+}
+
+void todoDone(std::string item){
+  todoRemove(item);
+  std::cout << "Enter '"<< item <<"' description" << std::endl << "> ";
+  std::string desc;
+  std::getline(std::cin >> std::ws, desc);
+  std::cout << std::endl;
+  logWriter(item,desc);
+  std::cout << std::endl;
 }
 
 void logger() { 
   if(argNum == 3 && argsList[1] == "add"){
-    todoWriter(); 
+    todoWriter(argsList[2]); 
+  }else if(argNum==3 && argsList[1]=="done"){
+  	todoDone(argsList[2]);
   }else if(argNum==3 && argsList[1]=="remove"){
-  	todoRemove();
-  } else if (argNum == 3){
-    logWriter();
+  	todoRemove(argsList[2]);
   }
 }
 
@@ -69,35 +78,59 @@ void getStats() { std::cout << "Stats feature coming soon " << std::endl; }
 void printHelper() {
   std::cout << std::string("usage: jikan <command> [<args>]\n")
     + "These are common Jikan commands:\n"
-    +"\nlog task\n"
-        + "   " + "<head> <desc> \tAdds a task of type 'work'\n" 
+        +"\ntodo list\n"
+        + "   " + "add <item> \t\tAdds item\n"
+        + "   " + "done <item> \t\tLogs item"
+        + "   " + "remove <item> \tRemoves an item\n"
     +"\nprint paths\n"
         + "   " + "path \t\tShow repository path\n"
         + "   " + "file \t\tShow logfile path\n"
         + "   " + "todo \t\tShow todo path\n"
-    +"\ntodo list\n"
-        + "   " + "add <item> \t\tAdds a todo item\n"
-        + "   " + "remove <item> \tRemoves a todo item\n"
+
     +"\nstats\n"
         + "   " + "stats \t\tShow statistics\n"
   << std::endl;
 }
 
+void printLog(){
+  std::fstream logFile;
+  std::string filepath = path + filenameLogs;
+  std::string line;
+  logFile.open(filepath.c_str());
+  while(logFile.good()){
+  	getline(logFile,line);
+  	std::cout << line << std::endl;
+  }
+  logFile.close();
+}
+
+void printTodo(){
+std::fstream todoFile;
+  std::string filepath = path + filenameTodo;
+  std::string line;
+  todoFile.open(filepath.c_str());
+  while(todoFile.good()){
+  	getline(todoFile,line);
+  	std::cout << line << std::endl;
+  }
+  todoFile.close();
+}
 
 void argHandler() {
-  std::string command = argsList[1];
-  if (command == "stats") {
-    getStats();
-  } else if (command == "file" ) {
-    std::cout << path + filenameLogs << std::endl;
-  } else if (command == "path" ) {
-    std::cout << path << std::endl;
-  } else if (command == "todo" ) {
-    std::cout << path + filenameTodo << std::endl;
-  } else if (3 <= argNum && argNum <= 4) { 
+  if (argNum==2){
+      std::string command = argsList[1];
+      if (command == "stats") {
+        getStats();
+      } else if (command == "log" ) {
+        printLog();
+      }  else if (command == "todo" ) {
+        printTodo();
+      } else if (command == "path" ) {
+        std::cout << path << std::endl;
+      }
+  } else if (argNum==3) { 
     logger();
   } else {
-    std::cout << command << std::endl;
     printHelper();
   }
 }
@@ -113,6 +146,7 @@ bool argVectorize(int argc, char *argv[]) {
   }
   return true;
 }
+
 int main(int argc, char *argv[]) {
   if (!argVectorize(argc, argv)) {
     return 0;
