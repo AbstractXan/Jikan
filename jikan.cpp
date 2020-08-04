@@ -78,15 +78,15 @@ void getStats() { std::cout << "Stats feature coming soon " << std::endl; }
 void printHelper() {
   std::cout << std::string("usage: jikan <command> [<args>]\n")
     + "These are common Jikan commands:\n"
-        +"\ntodo list\n"
+    +"\ntodo list\n"
         + "   " + "add <item> \t\tAdds item\n"
-        + "   " + "done <item> \t\tLogs item"
+        + "   " + "done <item> \t\tLogs item\n"
         + "   " + "remove <item> \tRemoves an item\n"
+    +"\nprint\n"
+        + "   " + "log \t\t\tPrint log\n"
+        + "   " + "todo \t\tPrint todo\n"
     +"\nprint paths\n"
         + "   " + "path \t\tShow repository path\n"
-        + "   " + "file \t\tShow logfile path\n"
-        + "   " + "todo \t\tShow todo path\n"
-
     +"\nstats\n"
         + "   " + "stats \t\tShow statistics\n"
   << std::endl;

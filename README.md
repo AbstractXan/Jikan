@@ -3,7 +3,7 @@ A simple commandline timestamp logger.  Jikan (時間) is Japanese for time.
 
 ## TODO
 - [ ] Log [tags]
-- [ ] Todolist [add, start, done]
+- [ ] Todolist [~~add~~, start, ~~done~~]
 - [ ] STATS 
 - [ ] EXPORT [html, csv]
 
@@ -31,17 +31,17 @@ Print logs after setting path in bashrc as follows:
 usage: jikan <command> [<args>]
 These are common Jikan commands:
 
-log task
-   <head> <desc>        Adds a task of type 'work'
+todo list
+   add <item>           Adds item
+   done <item>          Logs item
+   remove <item>        Removes an item
+
+print paths
+   log                  Print log
+   todo                 Print todo
 
 print paths
    path                 Show repository path
-   file                 Show logfile path
-   todo                 Show todo path
-
-todo list
-   add <item>           Adds a todo item
-   done <item>        Removes a todo item
 
 stats
    stats                Show statistics
