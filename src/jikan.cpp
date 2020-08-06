@@ -20,6 +20,8 @@ void argHandler() {
         std::cout << path << std::endl;
       } else if (command =="export"){
       	getExport();
+      } else if(command == "curr"){
+        currTask();
       }
   } else if (argNum==3) { 
     logger();
