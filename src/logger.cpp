@@ -8,7 +8,7 @@ int argNum;
 
 std::vector<std::string> argsList;
 
-std::string path = "E:/ss files/Jikan/src/";
+std::string path = "/home/abstractxan/Logs/";
 std::string filenameLogs = "logs.txt";
 std::string filenameTodo = "todo.txt";
 std::string filenameTemp = "temp.txt";
@@ -35,7 +35,7 @@ void logWriter(std::string data_A, std::string data_B,std::string data_C,std::st
   LogFile.open(filepath.c_str(), std::ios::app);
   
   
-  LogFile << data_A << "\" \"" <<data_B<< "\" \""<<data_C <<"\" \"" <<data_D<< "\" \""<<data_E<<"\" \"" <<data_F<< "\" \""<<std::endl;
+  LogFile << "\"" << data_A << "\" \"" <<data_B<< "\" \""<<data_C <<"\" \"" <<data_D<< "\" \""<<data_E<<"\" \"" <<data_F<< "\"" <<std::endl;
 
   LogFile.close();
 }
@@ -64,8 +64,6 @@ void todoRemove(std::string item){
 }
 
 void endTask(std::string item){
-  //Remove from To-Do
-  todoRemove(item);
 
   //Get Temp data
   //std::vector<std::string>data;
@@ -73,20 +71,28 @@ void endTask(std::string item){
   std::string line;
   std::fstream tempFile;
   std::string filepath = path + filenameTemp;
+  std::cout << filepath << std::endl;
   tempFile.open(filepath.c_str());
 
-  while(tempFile.good()){
+  if(tempFile.good()){
     getline(tempFile,line);
-    data=line;
   }
+
+  std::string delimiter="--";
+  std::string start=line.substr(0,line.find(delimiter));
+  std::cout << start << std::endl;
+
+
   char cur[80];
   time(&now);
   struct tm * timeinfo=localtime(&now);
 
   strftime(cur,sizeof(cur),"%d-%m-%Y %H:%M:%S",timeinfo);
   std::string end(cur);
-  std::string delimiter="--";
-  std::string start=data.substr(0,data.find(delimiter));
+  // std::string delimiter="--";
+  // std::string start=data.substr(0,data.find(delimiter));
+  
+  std::cout << start << std::endl;
   
   //Write start_time+end_time
   //logWriter(start,end);
@@ -104,7 +110,7 @@ void endTask(std::string item){
   tm.tm_sec = ss;
   tm.tm_isdst = -1;
   tStart=mktime(&tm);
-  
+
   time_t duration=now-tStart;
   struct tm * tinfo=localtime(&now);
   tinfo=localtime(&duration);
@@ -137,6 +143,9 @@ void endTask(std::string item){
   logWriter(start,end,interval,item,cat,desc);
   std::cout <<"Task Logged" << std::endl;
   std::cout << std::endl;
+
+  //Remove from To-Do
+  todoRemove(item);
 }
 
 void startTask(std::string task){
@@ -205,7 +214,7 @@ void printLog(){
 }
 
 void printTodo(){
-std::fstream todoFile;
+  std::fstream todoFile;
   std::string filepath = path + filenameTodo;
   std::string line;
   todoFile.open(filepath.c_str());
